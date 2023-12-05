@@ -6,7 +6,7 @@ import localFont from "next/font/local";
 import { cn } from "@/lib/utils";
 import { Inter } from "next/font/google";
 
-export const headingFont = localFont({
+const headingFont = localFont({
   src: "../../public/fonts/font.woff2",
 });
 
