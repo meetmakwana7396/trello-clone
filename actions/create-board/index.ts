@@ -16,14 +16,21 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     };
   }
   const { title, image } = data;
-  const [imageId, imageThumbUrl, imageFullUrl, imageLinkHtml, imageUserName] =
+  const [imageId, imageThumbUrl, imageFullUrl, imageLinkHTML, imageUserName] =
     image.split("|");
+  console.log({
+    imageId,
+    imageThumbUrl,
+    imageFullUrl,
+    imageLinkHTML,
+    imageUserName,
+  });
 
   if (
     !imageId ||
     !imageThumbUrl ||
     !imageFullUrl ||
-    !imageLinkHtml ||
+    !imageLinkHTML ||
     !imageUserName
   ) {
     return {
@@ -36,7 +43,12 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     board = await db.board.create({
       data: {
         title,
-        
+        orgId,
+        imageId,
+        imageThumbUrl,
+        imageFullUrl,
+        imageUserName,
+        imageLinkHTML,
       },
     });
   } catch (error) {

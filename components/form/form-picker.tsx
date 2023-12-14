@@ -83,6 +83,7 @@ export const FormPicker = ({ id, errors }: IFormPicker) => {
               src={image.urls.thumb}
               alt="Unsplash image"
               className="object-cover rounded-sm"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               fill
             />
             {selectedImageId === image.id && (
