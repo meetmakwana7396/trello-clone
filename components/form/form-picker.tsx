@@ -78,6 +78,7 @@ export const FormPicker = ({ id, errors }: IFormPicker) => {
               checked={selectedImageId === image.id}
               disabled={pending}
               value={`${image.id}|${image.urls.thumb}|${image.urls.full}|${image.links.html}|${image.user.name}`}
+              readOnly
             />
             <Image
               src={image.urls.thumb}
