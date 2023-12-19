@@ -58,7 +58,7 @@ export const FormInput = forwardRef<HTMLInputElement, IFormInputProps>(
             placeholder={placeholder}
             type={type}
             disabled={pending || disabled}
-            className={cn(className, "text-lg px-2 py-1 h-7")}
+            className={cn(className, "text-sm px-2 py-1 h-7")}
             aria-describedby={`${id}-error`}
           />
         </div>
