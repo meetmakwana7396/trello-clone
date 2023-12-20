@@ -6,6 +6,7 @@ import { List } from "@prisma/client";
 import React, { ElementRef, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
+import { ListOptions } from "./list-options";
 
 interface IListHeaderProps {
   data: List;
@@ -62,7 +63,7 @@ export function ListHeader({ data }: IListHeaderProps) {
 
   const onBlur = () => {
     formRef.current?.requestSubmit();
-  }
+  };
 
   return (
     <div className="pt-2 px-2 text-sm font-semibold flex justify-between items-start gap-x-2">
@@ -88,6 +89,7 @@ export function ListHeader({ data }: IListHeaderProps) {
           {title}
         </div>
       )}
+      <ListOptions onAddCard={() => {}} data={data} />
     </div>
   );
 }
