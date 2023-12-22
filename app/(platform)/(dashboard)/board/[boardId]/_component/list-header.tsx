@@ -9,10 +9,11 @@ import { useEventListener, useOnClickOutside } from "usehooks-ts";
 import { ListOptions } from "./list-options";
 
 interface IListHeaderProps {
+  onAddCard: () => void;
   data: List;
 }
 
-export function ListHeader({ data }: IListHeaderProps) {
+export function ListHeader({ data, onAddCard }: IListHeaderProps) {
   const formRef = useRef<ElementRef<"form">>(null);
   const inputRef = useRef<ElementRef<"input">>(null);
 
@@ -89,7 +90,7 @@ export function ListHeader({ data }: IListHeaderProps) {
           {title}
         </div>
       )}
-      <ListOptions onAddCard={() => {}} data={data} />
+      <ListOptions onAddCard={onAddCard} data={data} />
     </div>
   );
 }

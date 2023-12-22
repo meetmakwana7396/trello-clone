@@ -6,7 +6,7 @@ import {
   PopoverContent,
   PopoverClose,
 } from "@/components/ui/popover";
-import React from "react";
+import React, { ElementRef, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal, X } from "lucide-react";
 import FormSubmit from "@/components/form/form-submit";
@@ -14,6 +14,7 @@ import { Separator } from "@/components/ui/separator";
 import { useAction } from "@/hooks/use-action";
 import { deleteList } from "@/actions/delete-list";
 import { toast } from "sonner";
+import { copyList } from "@/actions/copy-list";
 
 interface IListOptionsProps {
   data: List;
@@ -21,9 +22,22 @@ interface IListOptionsProps {
 }
 
 export const ListOptions = ({ data, onAddCard }: IListOptionsProps) => {
+  const closeRef = useRef<ElementRef<"button">>(null)
+
   const { execute: executeDelete } = useAction(deleteList, {
     onSuccess: (data) => {
       toast.success(`List "${data.title}" deleted`);
+      closeRef.current?.click()
+    },
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
+
+  const { execute: executeCopy } = useAction(copyList, {
+    onSuccess: (data) => {
+      toast.success(`List "${data.title}" copied`);
+      closeRef.current?.click()
     },
     onError: (error) => {
       toast.error(error);
@@ -37,6 +51,13 @@ export const ListOptions = ({ data, onAddCard }: IListOptionsProps) => {
     executeDelete({ id, boardId });
   };
 
+  const onCopy = (formData: FormData) => {
+    const id = formData.get("id") as string;
+    const boardId = formData.get("boardId") as string;
+
+    executeCopy({ id, boardId });
+  };
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -48,7 +69,7 @@ export const ListOptions = ({ data, onAddCard }: IListOptionsProps) => {
         <div className="text-sm font-medium text-center text-neutral-600 pb-4">
           List actions
         </div>
-        <PopoverClose>
+        <PopoverClose ref={closeRef} asChild>
           <Button
             className="h-auto w-auto p-2 absolute top-2 right-2 text-neutral-600"
             variant={"ghost"}
@@ -64,7 +85,7 @@ export const ListOptions = ({ data, onAddCard }: IListOptionsProps) => {
         >
           Add card...
         </Button>
-        <form>
+        <form action={onCopy}>
           <input hidden type="text" id="id" name="id" value={data.id} />
           <input
             hidden
