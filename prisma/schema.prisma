@@ -31,7 +31,7 @@ model List {
   board      Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
   cards      Card[] 
   createdAt  DateTime @default(now())
-  updaatedAt DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 
   @@index([boardId])
 }
@@ -44,7 +44,7 @@ model Card {
   listId      String
   list        List     @relation(fields: [listId], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
-  updaatedAt  DateTime @updatedAt
+  updatedAt  DateTime @updatedAt
 
   @@index([listId])
 }
