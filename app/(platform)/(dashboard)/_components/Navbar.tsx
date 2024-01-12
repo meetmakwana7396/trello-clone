@@ -12,7 +12,7 @@ const Navbar = () => {
       {/* MOBILE SIDEBAR  */}
       <MobileSidebar />
       <div className="flex item-center gap-x-4">
-        <div className="hidden md:flex">
+        <div className="hidden md:flex items-center">
           <Logo />
         </div>
         <FormPopover align="start" side="bottom" sideOffset={18}>
